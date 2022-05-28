@@ -45,7 +45,7 @@ jobs:
 
       - name: sonarscanner begin
         if: ${{ env.SONAR_TOKEN != null }}
-        run: dotnet sonarscanner begin /o:dliu /k:lab18-sonar-scan /d:sonar.host.url=https://sonarcloud.io /v:"1.0" /d:sonar.login=$SONAR_TOKEN /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.exclusions="sonar-project.properties, .**/**, **/wwwroot/**, **/TestResults/**, **/obj/**, **/bin/**"
+        run: dotnet sonarscanner begin /o:dliu /k:lab18-sonar-scan /d:sonar.host.url=https://sonarcloud.io /v:"1.1" /d:sonar.login=$SONAR_TOKEN /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.exclusions="sonar-project.properties, .**/**, **/wwwroot/**, **/TestResults/**, **/obj/**, **/bin/**"
         env:
           SONAR_TOKEN: ${{ secrets.SONARTOKEN }}
 
