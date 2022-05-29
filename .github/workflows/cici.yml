@@ -41,7 +41,9 @@ jobs:
           java-version: "11"
 
       - name: Setup Dotnet-SonarScanner
-        run: dotnet tool install --global dotnet-sonarscanner --version 5.5.3
+        run: |
+          dotnet tool install --global dotnet-sonarscanner --version 5.5.3
+          dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.9
 
       - name: sonarscanner begin
         if: ${{ env.SONAR_TOKEN != null }}
@@ -67,6 +69,15 @@ jobs:
 
       - name: Publish
         run: dotnet publish -c Release -o aspnetapi
+
+      - name: Publish Coverage Reports
+        run: reportgenerator "-reports:./**/coverage.*.xml" -targetdir:"coveragereport" -reporttype:Html
+
+      - name: Upload coveragereport
+        uses: actions/upload-artifact@v2
+        with:
+          name: coveragereport
+          path: "./coveragereport"
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2

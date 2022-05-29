@@ -31,3 +31,11 @@ dotnet build --no-incremental
 dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --collect:"XPlat Code Coverage"
 dotnet sonarscanner end /d:sonar.login=$SONAR_TOKEN
 ```
+
+## Generate Reports
+
+```
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --collect:"XPlat Code Coverage"
+dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.9
+reportgenerator "-reports:./**/coverage.*.xml" -targetdir:"coveragereport" -reporttype:Html
+```
